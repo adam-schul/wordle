@@ -1,6 +1,3 @@
-
-
-
 import random 
 
 board = ['_', '_', '_', '_']
@@ -11,7 +8,6 @@ words = [
     'tram',
     'slam',
     'harm',
-    
 ]
 
 choice = random.choice(words)
@@ -22,7 +18,12 @@ check = True
 
 while check:
     
-    word = input('Input word: ')
+    word = input('Input 4-letter word (or q to quit): ')
+    
+    if word == 'q':
+        break
+    
+    letters = []
     
     if len(word) > 4 or len(word) < 4:
         print('Please input a 4-letter word.')
@@ -31,14 +32,16 @@ while check:
     for i in range(4):
         if choice[i] == word[i]:
             board[i] = word[i]
+            letters.append(word[i])
             
     if '_' not in board:
         check = False
         continue
             
     for i in range(4):
-        if word[i] in choice:
+        if word[i] in choice and word[i] not in letters:
             print(f'{word[i]} is in the word.')
+            letters.append(word[i])
     
     for i in range(4):
         print(board[i], end=' ')
@@ -49,7 +52,4 @@ while check:
 
 else:
     print('You guessed the word.')
-    
-
-            
     
